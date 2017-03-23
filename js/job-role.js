@@ -1,12 +1,13 @@
+
 let jobRole = (function() {
 
-  let str = 'hello';
-  let printMess = () => {
-    console.log(str);
+  let html = '<input type="text" id="other-title" placeholder="Your Job Role">';
+  let addTextInput = (otherIsSelected) => {
+    (otherIsSelected) ? $('select#title').after(html): $('input#other-title').remove();
   }
 
   return {
-    getGreeting: printMess
+    addTextInputField: addTextInput
   }
 
 })();
