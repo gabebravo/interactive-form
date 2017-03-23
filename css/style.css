@@ -8,6 +8,15 @@ div#colors-js-puns {
     display: none;
 }
 
+.disabledCheckbox {
+  color: #888;
+	font-weight: bold;
+}
+
+span.totalCost {
+    color: blue;
+}
+
 * {
   box-sizing: border-box;
 }

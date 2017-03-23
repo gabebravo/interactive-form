@@ -11,7 +11,11 @@ let shirtInfo = (function() {
 // empty the select, and based on the theme, print the correct options
   let populateOptionColors = (theme) => {
     $colorSelect.empty();
-    (theme === 'puns') ? printColorsToHTML(punsColors) : printColorsToHTML(heartColors);
+    if( theme === 'select theme') {
+      printSelectColorMessage();
+    } else {
+      (theme === 'puns') ? printColorsToHTML(punsColors) : printColorsToHTML(heartColors);
+    }
   }
 // prints out the correct colors to the page
   let printColorsToHTML = (arr) => {
@@ -20,6 +24,11 @@ let shirtInfo = (function() {
       $colorSelect.append(html);
     }
   }
+// print default message
+    let printSelectColorMessage = () => {
+      let html = '<option><-- Please select a T-shirt theme</option>';
+        $colorSelect.append(html);
+    }
 
   return {
     showColorsDropdown: showColorOptions,
