@@ -1,14 +1,3 @@
-// function loadScripts(){
-//    let directory = 'js/';
-//    let extension = '.js';
-//    let files = ['job-role', 'tshirt-info', 'register-activities', 'payment-info'];
-//    for (let file of files){
-//        let path = (`${directory}${file}${extension}`);
-//        $('body').append(`<script type="text/javascript" src="${path}"></script>`);
-//    }
-// }
-//loadScripts();
-
 // handles focus on pageload
 $( window ).on( "load", pageloadHandler );
    function pageloadHandler(evt){
@@ -20,7 +9,15 @@ $('select#title').change( function(evt) {
    let option = $(evt.target).find(":selected").val().toLowerCase();
    (option === 'other') ? jobRole.addTextInputField(true): jobRole.addTextInputField(false);
 });
+// add color selector, get the design option, populate colors options in dropdown
+$('select#design').change( function(evt) {
+   evt.preventDefault();
+   let option = $(evt.target).find(":selected").val().toLowerCase();
+   var newstr = option.replace(/js/i, '').trim();
 
+   shirtInfo.showColorsDropdown();
+   shirtInfo.getColorOptions(newstr);
+});
 
 // event handlers
    // $('select#title').change( function(evt) {

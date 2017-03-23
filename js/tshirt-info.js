@@ -1,12 +1,29 @@
 let shirtInfo = (function() {
 
-  let str = 'world';
-  let printMess = () => {
-    console.log(str);
+  let punsColors = ["Cornflower Blue","Dark Slate Grey","Gold"];
+  let heartColors = ["Tomato", "Steel Blue", "Dim Grey"];
+
+  let $colorSelect = $('select#color');
+// display hidden element
+  let showColorOptions = () => {
+    $('div#colors-js-puns').show();
+  }
+// empty the select, and based on the theme, print the correct options
+  let populateOptionColors = (theme) => {
+    $colorSelect.empty();
+    (theme === 'puns') ? printColorsToHTML(punsColors) : printColorsToHTML(heartColors);
+  }
+// prints out the correct colors to the page
+  let printColorsToHTML = (arr) => {
+    for(let option of arr){
+      let html = '<option value="'+ option.toLowerCase() + '">'+ option +'</option>';
+      $colorSelect.append(html);
+    }
   }
 
   return {
-    getGreeting: printMess
+    showColorsDropdown: showColorOptions,
+    getColorOptions: populateOptionColors
   }
 
 })();
