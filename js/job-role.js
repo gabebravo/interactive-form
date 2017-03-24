@@ -13,14 +13,14 @@ let jobRole = (function() {
     return emailRegex.test(email);
   }
 
+// get Basic Info input and label and do validation checks
   let validateBasicInfo = () => {
-    // Basic Info input and label
+
     let $inputNameElm = $('input#name');
     let basicInfoNameVal = $inputNameElm.val();
     let $inputNameLabel = $inputNameElm.prev();
-    $inputNameLabel.text('Name:');
+    $inputNameLabel.text('Name:'); // reset label
 
-    // validation check
     if(!basicInfoNameVal) {
       $inputNameLabel.text('Name: (please provide your name)');
       $inputNameLabel.addClass('validation-error');
@@ -31,8 +31,11 @@ let jobRole = (function() {
     let $inputEmailLabel = $inputEmailElm.prev();
     $inputEmailLabel.text('Email:');
 
-    if(!basicInfoEmailVal || !validateEmail(basicInfoEmailVal)) {
-      $inputEmailLabel.text('Email: (please provide a valid email address)');
+    if (!basicInfoEmailVal) {
+      $inputEmailLabel.text('Email: (please provide an email address)');
+      $inputEmailLabel.addClass('validation-error');
+    } else if (!validateEmail(basicInfoEmailVal)){
+      $inputEmailLabel.text('Email: (please provide a correctly formatted email address)');
       $inputEmailLabel.addClass('validation-error');
     }
 

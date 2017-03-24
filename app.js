@@ -48,24 +48,39 @@ $('select#payment').change( function(evt) {
      paymentInfo.getPaymentOptions($elem);
 });
 
+// REAL TIME email validation once the user focuses on the field
+$('input[type="email"]').on('keypress keydown keyup',function(){
+   let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+   let basicInfoEmailVal = $(this).val();
+   let $inputEmailLabel = $(this).prev();
+
+      if (!basicInfoEmailVal.match(emailRegex)) {
+          // there is a mismatch, hence show the error message
+          $inputEmailLabel.text('Email: (please provide a correctly formatted email address)');
+          $inputEmailLabel.addClass('validation-error');
+      } else {
+             // else, do not display message
+            $inputEmailLabel.text('Email:');
+            $inputEmailLabel.removeClass('validation-error');
+      }
+});
+
+// JS promise to fire off the chain of function callbacks
 let validateForm = () => {
    return new Promise( function(resolve,reject){
       { resolve(jobRole.validate()) };
    } );
 }
-
+// catch errors
 let handleErrors = () => {
    console.log('errors');
 }
-
+// form validation upon submission
 $('button').on('click', function(evt) {
    evt.preventDefault();
    $('label').removeClass('validation-error');
 
    validateForm()
-      .then( function validateShirtInfo(){
-   		return shirtInfo.validate();
-   	} )
       .then( function validateRegistration(){
    		return registration.validate();
    	} )

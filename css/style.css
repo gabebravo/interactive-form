@@ -2,7 +2,7 @@
   Base Element Styles
 ==================================== */
 
-/* ADDED DEFUALT HIDE TO COLOR */
+/* FORM VALIDATION STYLES */
 
 div#colors-js-puns {
     display: none;
@@ -24,6 +24,8 @@ span.totalCost {
 .validation-error {
   color: red;
 }
+
+/* ====================== */
 
 * {
   box-sizing: border-box;

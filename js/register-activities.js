@@ -1,7 +1,9 @@
 let registration = (function() {
 
+// some member-wide private variables
   let totalAmt = 0, numArr = [];
 
+// disables checkboxes if they are in the same timeslot
   let disableCheckboxes = (arr) => {
     arr.map(function(index) {
         if(!$(arr[index]).is(":checked")) {
@@ -11,6 +13,7 @@ let registration = (function() {
     });
   }
 
+// re-enables checkboxes if a checbox previously checked is unchecked
   let enableCheckboxes = (arr) => {
     arr.map(function(index) {
         $(arr[index]).removeAttr("disabled");
@@ -18,6 +21,7 @@ let registration = (function() {
     });
   }
 
+// these two functions calculate the registration total
   let addAndDisplayTotal = (amt) => {
     numArr.push(amt);
     totalAmt += amt;
@@ -34,8 +38,18 @@ let registration = (function() {
     $totalElm.text('Total: $' + totalAmt);
   }
 
+// validates that at least one checkbox is clicked
   let validateRegistrationInfo = function() {
-     console.log('registration info validated');
+    // reset validation error message
+    $('fieldset.activities legend').css('margin-bottom', '1.125em')
+    $('p.validation-error').remove();
+    let checkboxIsChecked = $('input[type="checkbox"]').is(":checked");
+    // display validation error message
+      if(!checkboxIsChecked){
+        $('fieldset.activities legend').css('margin-bottom', '0')
+        let $firstLabel =  $('fieldset.activities label:nth-of-type(1)');
+        $( '<p class="validation-error">Please select an activity</p>' ).insertBefore( $firstLabel );
+      }
   };
 
   return {
