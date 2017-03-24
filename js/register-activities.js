@@ -1,4 +1,4 @@
-let activities = (function() {
+let registration = (function() {
 
   let totalAmt = 0, numArr = [];
 
@@ -30,15 +30,20 @@ let activities = (function() {
     numArr.pop(amt);
     totalAmt -= amt;
 
-    let $totalElm = $('.totalCost');
+  let $totalElm = $('.totalCost');
     $totalElm.text('Total: $' + totalAmt);
   }
+
+  let validateRegistrationInfo = function() {
+     console.log('registration info validated');
+  };
 
   return {
     disableEvents: disableCheckboxes,
     resetEvents: enableCheckboxes,
     showAddedTotal: addAndDisplayTotal,
-    showSubtractedTotal: subtractAndDisplayTotal
+    showSubtractedTotal: subtractAndDisplayTotal,
+    validate: validateRegistrationInfo
   }
 
 })();

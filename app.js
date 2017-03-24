@@ -29,12 +29,48 @@ $('.activities input').on("click", function () {
     let elmArr = $elm.closest('fieldset').find(elmClass);
 
 // check to see if the selection is currently checked, and either disable or reset the events
-   (!$elm.is(":checked")) ? activities.resetEvents(elmArr) : activities.disableEvents(elmArr);
+   (!$elm.is(":checked")) ? registration.resetEvents(elmArr) : registration.disableEvents(elmArr);
 
    let activityText = $elm.closest('label').text();
    let indexOf$ = activityText.indexOf('$') + 1;
    let cost = Number(activityText.split('').splice(indexOf$, 3).join(''));
 // check to see if the selection is currently checked, and either add or subtract the total
-   (!$elm.is(":checked")) ? activities.showSubtractedTotal(cost) : activities.showAddedTotal(cost);
+   (!$elm.is(":checked")) ? registration.showSubtractedTotal(cost) : registration.showAddedTotal(cost);
 
+});
+
+// PAYMENT INFO : hide everything, get payment option, show/hide the respective divs accordingly
+$('select#payment').change( function(evt) {
+   evt.preventDefault();
+   $('.payment-option').hide();
+   // pass the selected element to a function to hanlde hide/show
+   let $elem = $(evt.target);
+     paymentInfo.getPaymentOptions($elem);
+});
+
+let validateForm = () => {
+   return new Promise( function(resolve,reject){
+      { resolve(jobRole.validate()) };
+   } );
+}
+
+let handleErrors = () => {
+   console.log('errors');
+}
+
+$('button').on('click', function(evt) {
+   evt.preventDefault();
+   $('label').removeClass('validation-error');
+
+   validateForm()
+      .then( function validateShirtInfo(){
+   		return shirtInfo.validate();
+   	} )
+      .then( function validateRegistration(){
+   		return registration.validate();
+   	} )
+      .then( function validatePaymetInfo(){
+   		return paymentInfo.validate();
+   	} )
+   	.catch( handleErrors );
 });

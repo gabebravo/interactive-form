@@ -25,14 +25,19 @@ let shirtInfo = (function() {
     }
   }
 // print default message
-    let printSelectColorMessage = () => {
-      let html = '<option><-- Please select a T-shirt theme</option>';
-        $colorSelect.append(html);
-    }
+  let printSelectColorMessage = () => {
+    let html = '<option><-- Please select a T-shirt theme</option>';
+      $colorSelect.append(html);
+  }
+
+  let validateShirtInfo = function() {
+     console.log('tshirt info validated');
+  };
 
   return {
     showColorsDropdown: showColorOptions,
-    getColorOptions: populateOptionColors
+    getColorOptions: populateOptionColors,
+    validate: validateShirtInfo
   }
 
 })();

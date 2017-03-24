@@ -1,12 +1,19 @@
-let paymetInfo = (function() {
+let paymentInfo = (function() {
 
-  let str = 'bar';
-  let printMess = () => {
-    console.log(str);
+  let showHidePaymentOptions = (elm) => {
+    let option = elm.find(":selected").val().split(' ').join('').toLowerCase();
+     let $slectedDiv = elm.closest('fieldset').find('.' + option);
+     // show that class
+     $slectedDiv.show();
   }
 
+  let validatePaymentInfo = () => {
+     console.log('payment info validated');
+  };
+
   return {
-    getGreeting: printMess
+    getPaymentOptions: showHidePaymentOptions,
+    validate: validatePaymentInfo
   }
 
 })();

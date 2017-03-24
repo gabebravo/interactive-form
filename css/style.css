@@ -17,6 +17,14 @@ span.totalCost {
     color: blue;
 }
 
+.payment-option {
+  display: none;
+}
+
+.validation-error {
+  color: red;
+}
+
 * {
   box-sizing: border-box;
 }
