@@ -81,10 +81,8 @@ $('button').on('click', function(evt) {
    validateForm();
 
    if( jobRole.validate() && registration.validate() && paymentInfo.validate() ) {
-      //console.log('validated');
-      location.reload();
+      location.reload(true);
    } else {
-      //console.log('not-validated');
       evt.preventDefault(evt);
    }
 
