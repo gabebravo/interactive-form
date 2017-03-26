@@ -2,6 +2,9 @@
 $( window ).on( "load", pageloadHandler );
    function pageloadHandler(evt){
       $('input#name').focus();
+      $('input#other-title').hide();
+      $('div#colors-js-puns').hide();
+      $('.payment-option').hide();
    }
 
 // JOB ROLE : get the dropdown option value, and if its "Other" add an text field
@@ -67,25 +70,22 @@ $('input[type="email"]').on('keypress keydown keyup',function(){
 
 // JS promise to fire off the chain of function callbacks
 let validateForm = () => {
-   return new Promise( function(resolve,reject){
-      { resolve(jobRole.validate()) };
-   } );
+   jobRole.validate();
+   registration.validate();
+   paymentInfo.validate();
 }
-// catch errors
-let handleErrors = () => {
-   console.log('errors');
-}
-// form validation upon submission
-$('button').on('click', function(evt) {
-   evt.preventDefault();
-   $('label').removeClass('validation-error');
 
-   validateForm()
-      .then( function validateRegistration(){
-   		return registration.validate();
-   	} )
-      .then( function validatePaymetInfo(){
-   		return paymentInfo.validate();
-   	} )
-   	.catch( handleErrors );
+$('button').on('click', function(evt) {
+
+   $('label').removeClass('validation-error');
+   validateForm();
+
+   if( jobRole.validate() && registration.validate() && paymentInfo.validate() ) {
+      //console.log('validated');
+      location.reload();
+   } else {
+      //console.log('not-validated');
+      evt.preventDefault(evt);
+   }
+
 });

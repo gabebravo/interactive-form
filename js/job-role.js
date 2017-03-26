@@ -24,6 +24,7 @@ let jobRole = (function() {
     if(!basicInfoNameVal) {
       $inputNameLabel.text('Name: (please provide your name)');
       $inputNameLabel.addClass('validation-error');
+      return false;
     }
 
     let $inputEmailElm = $('input#mail');
@@ -34,10 +35,13 @@ let jobRole = (function() {
     if (!basicInfoEmailVal) {
       $inputEmailLabel.text('Email: (please provide an email address)');
       $inputEmailLabel.addClass('validation-error');
+      return false;
     } else if (!validateEmail(basicInfoEmailVal)){
       $inputEmailLabel.text('Email: (please provide a correctly formatted email address)');
       $inputEmailLabel.addClass('validation-error');
+      return false;
     }
+    return true;
 
 	};
 

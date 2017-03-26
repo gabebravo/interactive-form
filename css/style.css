@@ -4,10 +4,6 @@
 
 /* FORM VALIDATION STYLES */
 
-div#colors-js-puns {
-    display: none;
-}
-
 .disabledCheckbox {
   color: #888;
 	font-weight: bold;
@@ -15,10 +11,6 @@ div#colors-js-puns {
 
 span.totalCost {
     color: blue;
-}
-
-.payment-option {
-  display: none;
 }
 
 .validation-error {

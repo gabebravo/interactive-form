@@ -49,7 +49,9 @@ let registration = (function() {
         $('fieldset.activities legend').css('margin-bottom', '0')
         let $firstLabel =  $('fieldset.activities label:nth-of-type(1)');
         $( '<p class="validation-error">Please select an activity</p>' ).insertBefore( $firstLabel );
+        return false;
       }
+    return true;
   };
 
   return {

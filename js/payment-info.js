@@ -32,28 +32,37 @@ let paymentInfo = (function() {
 // get checkable user input, check each field to see if its valid, display errors
   let validatePaymentInfo = () => {
 
-     let $cardNumberInput = $('input#cc-num');
-     let $cardNumberLabel = $cardNumberInput.prev();
-     let $cardNumberVal = $cardNumberInput.val().split(' ').join('').replace(/[^\w\s]/gi, '');
+    let paymentMethodSelected = $('select#payment option:selected').val();
 
-     let $zipCodeInput = $('input#zip');
-     let $zipCodeLabel = $zipCodeInput.prev();
-     let $zipCodeVal = $zipCodeInput.val().split(' ').join('').replace(/[^\w\s]/gi, '');
+      if(paymentMethodSelected === 'credit card'){
+          let $cardNumberInput = $('input#cc-num');
+          let $cardNumberLabel = $cardNumberInput.prev();
+          let $cardNumberVal = $cardNumberInput.val().split(' ').join('').replace(/[^\w\s]/gi, '');
 
-     let $cvvNumberInput = $('input#cvv');
-     let $cvvNumberLabel = $cvvNumberInput.prev();
-     let $cvvNumberVal = $cvvNumberInput.val().split(' ').join('').replace(/[^\w\s]/gi, '');
+          let $zipCodeInput = $('input#zip');
+          let $zipCodeLabel = $zipCodeInput.prev();
+          let $zipCodeVal = $zipCodeInput.val().split(' ').join('').replace(/[^\w\s]/gi, '');
 
-     if( !regexCheck($cardNumberVal) ) {
-       $cardNumberLabel.addClass('validation-error');
-     }
-     if( !regexCheck($zipCodeVal) ) {
-       $zipCodeLabel.addClass('validation-error');
-     }
-     if( !regexCheck($cvvNumberVal) ) {
-       $cvvNumberLabel.addClass('validation-error');
-     }
+          let $cvvNumberInput = $('input#cvv');
+          let $cvvNumberLabel = $cvvNumberInput.prev();
+          let $cvvNumberVal = $cvvNumberInput.val().split(' ').join('').replace(/[^\w\s]/gi, '');
 
+          if( !regexCheck($cardNumberVal) ) {
+            $cardNumberLabel.addClass('validation-error');
+            return false;
+          }
+          if( !regexCheck($zipCodeVal) ) {
+            $zipCodeLabel.addClass('validation-error');
+            return false;
+          }
+          if( !regexCheck($cvvNumberVal) ) {
+            $cvvNumberLabel.addClass('validation-error');
+            return false;
+          }
+      } else if (paymentMethodSelected === 'select_method') {
+          return false;
+      }
+      return true;
   };
 
   return {
