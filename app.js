@@ -70,18 +70,20 @@ $('input[type="email"]').on('keypress keydown keyup',function(){
 
 // JS promise to fire off the chain of function callbacks
 let validateForm = () => {
-   jobRole.validate();
-   registration.validate();
-   paymentInfo.validate();
+   let isJobRoldeValid = jobRole.validate();
+   let isRegistrationValid = registration.validate();
+   let isPaymentInfoValid = paymentInfo.validate();
+
+   return isJobRoldeValid && isRegistrationValid && isPaymentInfoValid;
 }
 
 $('button').on('click', function(evt) {
 
    $('label').removeClass('validation-error');
-   validateForm();
+   let formIsValid = validateForm();
 
-   if( jobRole.validate() && registration.validate() && paymentInfo.validate() ) {
-      location.reload(true);
+   if( formIsValid ) {
+      location.reload();
    } else {
       evt.preventDefault(evt);
    }
